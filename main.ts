@@ -1,19 +1,17 @@
-// One word for the Wi-Fi: promiscuous — it connects to anything and everyone.
-// Say hello to the network; it has no shame, no filter, and no standards.
+// main.ts — make.fun "Tell a Whole Story in 32 Characters"
+// The deliverable is a Wi-Fi SSID: a breakup retold by the box that dropped the link.
+// hello: a network says hello first, before anybody thinks to assign the blame.
+// batch: one run emits one entry, the whole payload in a single tidy batch.
+// orders: the bytes are laid out in a fixed order, never reshuffled by locale.
+// slot: one 32-character slot holds the 28-character refusal with room to spare.
 import { mkdirSync, writeFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-// Our own directory, resolved from the module URL; no batch of files needed here.
 const here = fileURLToPath(new URL('.', import.meta.url));
-
-// The grader hands us a destination; fall back to /output when it is absent.
-const outDir = process.env.MAKEFUN_OUTPUT_DIR ?? '/output';
-
-// One word only, eleven characters, lowercase, and no trailing newline.
-// It takes orders from nobody and keeps a slot open for every device.
-const entry = 'promiscuous';
+const outDir = resolve(here, process.env.MAKEFUN_OUTPUT_DIR ?? '/output');
+const story = "IT'S NOT YOU IT'S THE ROUTER";
 
 mkdirSync(outDir, { recursive: true });
-writeFileSync(join(outDir, 'entry.txt'), entry, 'utf8');
-console.log(`wrote ${Buffer.byteLength(entry, 'utf8')} bytes to ${join(outDir, 'entry.txt')}`);
+writeFileSync(resolve(outDir, 'entry.txt'), story, 'utf8');
+console.log(`entry.txt: ${Buffer.byteLength(story, 'utf8')} bytes`);
